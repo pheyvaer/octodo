@@ -1,11 +1,20 @@
-window.onload = async () => {
-  const {title, url, issueNumber} = await browser.storage.local.get(['title', 'url', 'issueNumber']);
-  const todo = `👨‍💻 Fix [issue ${issueNumber}](${url}): ${title}`;
-  console.log(todo);
+const executing = browser.tabs.executeScript({file: "/content_script.js"})
+.catch(console.error);
 
-  navigator.clipboard.writeText(todo).then(function() {
-    document.querySelector('#message').innerText = 'Copied!';
-  }, function() {
-    /* clipboard write failed */
-  });
+executing.then(createTodo, console.error);
+
+async function createTodo() {
+  const {issueTitle, issueNumber, url, error} = await browser.storage.local.get(['issueTitle', 'url', 'issueNumber', 'error']);
+
+  if (error === 'invalid url') {
+    document.querySelector('#message').innerText = 'This website is not supported.';
+  } else {
+    const todo = `👨‍💻 Fix [issue ${issueNumber}](${url}): ${issueTitle}`;
+
+    navigator.clipboard.writeText(todo).then(function() {
+      document.querySelector('#message').innerText = 'Copied!';
+    }, function() {
+      /* clipboard write failed */
+    });
+  }
 };

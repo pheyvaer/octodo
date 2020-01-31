@@ -6,16 +6,6 @@
   "icons": {
     "64": "icons/icon.png"
   },
-  "content_scripts": [
-    {
-      "matches": [
-        "*://*.github.com/*"
-      ],
-      "js": [
-        "content_script.js"
-      ]
-    }
-  ],
   "browser_action": {
     "default_icon": {
       "64": "icons/icon.png"
@@ -28,6 +18,7 @@
   },
   "permissions": [
     "storage",
-    "clipboardWrite"
+    "clipboardWrite",
+    "activeTab"
   ]
 }
