@@ -4,7 +4,7 @@
   "description": "Creates markdown todos",
   "version": "0.0.1",
   "icons": {
-    "64": "icons/icon.png"
+    "64": "icons/octopus.png"
   },
   "browser_action": {
     "default_icon": {

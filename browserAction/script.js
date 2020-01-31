@@ -14,7 +14,7 @@ async function createTodo() {
     navigator.clipboard.writeText(todo).then(function() {
       document.querySelector('#message').innerText = 'Copied!';
     }, function() {
-      /* clipboard write failed */
+      document.querySelector('#message').innerText = 'Unable to copy!';
     });
   }
 };
