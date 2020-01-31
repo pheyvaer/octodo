@@ -8,7 +8,7 @@
   },
   "browser_action": {
     "default_icon": {
-      "64": "icons/icon.png"
+      "64": "icons/octopus.png"
     },
     "default_popup": "browserAction/index.html",
     "default_title": "todo-creator"
