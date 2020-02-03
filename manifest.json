@@ -20,5 +20,10 @@
     "storage",
     "clipboardWrite",
     "activeTab"
-  ]
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "octodo@example.com"
+    }
+  }
 }
