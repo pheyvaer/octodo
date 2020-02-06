@@ -1,26 +1,42 @@
 main();
 
 function main() {
-  let issueTitle;
+  let title;
   let url = window.location.href;
-  let issueNumber;
+  let number;
   let error;
+  let type;
 
   if (url.indexOf('github.com') !== -1) {
     const titleEl = document.querySelector('.js-issue-title');
-    issueTitle = titleEl.innerText;
-    issueNumber = document.querySelector('.gh-header-number').innerText.replace('#', '');
+    title = titleEl.innerText;
+    number = document.querySelector('.gh-header-number').innerText.replace('#', '');
   } else if (url.indexOf('gitlab.') !== -1) {
-    const titleEl = document.querySelector('.title-container h2.title.qa-title');
-    issueTitle = titleEl.innerText;
-    issueNumber = document.querySelector('.js-title-container h2.breadcrumbs-sub-title').innerText.replace('#', '');
+    let titleEl = document.querySelector('.issue-details h2.title.qa-title');
+    number = document.querySelector('.js-title-container h2.breadcrumbs-sub-title').innerText.replace('#', '');
+    type = 'issue';
+
+    if (!titleEl) {
+      // No title found for an issue. Let's try for a merge request.
+      titleEl = document.querySelector('.merge-request-details h2.title.qa-title');
+      number = document.querySelector('.js-title-container h2.breadcrumbs-sub-title').innerText.replace('!', '');
+      type = 'merge-request';
+    }
+
+    if (titleEl) {
+      title = titleEl.innerText;
+    } else {
+      error = 'data not found';
+    }
   } else {
     error = 'invalid url';
   }
 
-  console.log(issueNumber);
-  console.log(issueTitle);
+  console.log(number);
+  console.log(title);
   console.log(url);
+  console.log(error);
+  console.log(type);
 
-  browser.storage.local.set({issueTitle, issueNumber, url, error});
+  browser.storage.local.set({title, number, url, type, error});
 }

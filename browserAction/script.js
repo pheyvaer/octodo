@@ -18,12 +18,21 @@ const simpleButton = document.querySelector('#simple button');
 simpleButton.onclick = createSimpleText;
 
 async function createTodo(emoji = '👨‍💻') {
-  const {issueTitle, issueNumber, url, error} = await browser.storage.local.get(['issueTitle', 'url', 'issueNumber', 'error']);
+  const {title, number, url, error, type} = await browser.storage.local.get(['title', 'url', 'number', 'error', 'type']);
 
   if (error === 'invalid url') {
     document.querySelector('#message').innerText = 'This website is not supported.';
+  } else if (error === 'data not found') {
+    document.querySelector('#message').innerText = 'This page is not suppored.';
   } else {
-    const todo = emoji + ` Fix [issue ${issueNumber}](${url}): ${issueTitle}`;
+    let todo;
+
+    if (type === 'issue') {
+      todo = emoji + ` Fix [issue ${number}](${url}): ${title}`;
+    } else {
+      todo = emoji + ` [PR ${number}](${url}): ${title}`;
+    }
+
     document.querySelector('#emojis').classList.remove('hidden');
     document.querySelector('#simple').classList.remove('hidden');
 
@@ -36,8 +45,8 @@ async function createTodo(emoji = '👨‍💻') {
 };
 
 async function createSimpleText() {
-  const {issueTitle, issueNumber, url, error} = await browser.storage.local.get(['issueTitle', 'url', 'issueNumber', 'error']);
-  const text = `${issueTitle} (see [issue ${issueNumber}](${url}))`;
+  const {title, number, url, error} = await browser.storage.local.get(['title', 'url', 'number', 'error']);
+  const text = `${title} (see [issue ${number}](${url}))`;
 
   navigator.clipboard.writeText(text).then(function() {
     document.querySelector('#message').innerText = `Copied simple text!`;
