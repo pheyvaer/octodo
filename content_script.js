@@ -11,6 +11,12 @@ function main() {
     const titleEl = document.querySelector('.js-issue-title');
     title = titleEl.innerText;
     number = document.querySelector('.gh-header-number').innerText.replace('#', '');
+
+    if (url.indexOf('/pull/') !== -1) {
+      type = 'merge-request';
+    } else {
+      type = 'issue';
+    }
   } else if (url.indexOf('gitlab.') !== -1) {
     let titleEl = document.querySelector('.issue-details h2.title.qa-title');
     number = document.querySelector('.js-title-container h2.breadcrumbs-sub-title').innerText.replace('#', '');
