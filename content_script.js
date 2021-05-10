@@ -19,13 +19,13 @@ function main() {
     }
   } else if (url.indexOf('gitlab.') !== -1) {
     let titleEl = document.querySelector('.issue-details h2.title.qa-title');
-    number = document.querySelector('.js-title-container h2.breadcrumbs-sub-title').innerText.replace('#', '');
+    number = document.querySelector('h2.breadcrumbs-sub-title').innerText.replace('#', '');
     type = 'issue';
 
     if (!titleEl) {
       // No title found for an issue. Let's try for a merge request.
       titleEl = document.querySelector('.merge-request-details h2.title.qa-title');
-      number = document.querySelector('.js-title-container h2.breadcrumbs-sub-title').innerText.replace('!', '');
+      number = document.querySelector('h2.breadcrumbs-sub-title').innerText.replace('!', '');
       type = 'merge-request';
     }
 
