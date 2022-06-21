@@ -18,7 +18,7 @@ function main() {
       type = 'issue';
     }
   } else if (url.indexOf('gitlab.') !== -1) {
-    let titleEl = document.querySelector('.issue-details h2.title.qa-title');
+    let titleEl = document.querySelector('.issue-details h1.title.qa-title');
     number = document.querySelector('h2.breadcrumbs-sub-title').innerText.replace('#', '');
     type = 'issue';
 

@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "web-ext": "^7.1.0"
+  },
+  "scripts": {
+    "start": "npx web-ext run",
+    "build": "npx web-ext build"
+  }
+}
