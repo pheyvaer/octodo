@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "web-ext": "^7.1.0"
+    "web-ext": "^7.5.0"
   },
   "scripts": {
     "start": "npx web-ext run",
